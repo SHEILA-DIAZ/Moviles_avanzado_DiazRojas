@@ -41,3 +41,7 @@ print("MONTO COMPRA: \(montoCompra)")
 print("INTERES: \(interes)")
 print("MONTO FINAN.: \(montoFinanciado)")
 print("CUOTA M.: \(cuotaMensual)")
+
+// 5. Generación de la tabla
+print("\nMes \t Monto Inicial \t Cuota Mensual \t Resta x Pago")
+var saldoActual = montoFinanciado
