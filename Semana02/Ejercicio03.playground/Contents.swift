@@ -43,7 +43,7 @@ print("Mes \t Fecha \t\t Monto Inicial \t Pago \t\t Resta por Pagar")
 
 var saldo = montoFinanciado
 var calendario = Calendar.current
-var fechaActual = Date() // Toma la fecha de hoy
+var fechaActual = Date()
 let dateFormatter = DateFormatter()
 dateFormatter.dateFormat = "dd/MM/yyyy"
 
@@ -56,25 +56,26 @@ for mes in 1...mesesPlan {
     mesesEfectivamentePagados += 1
     let fechaTexto = dateFormatter.string(from: fechaActual)
     
-    // Determinar si hay pago adicional este mes
+    // Determinar si hay pago adicional este mes (validando que mesAdelantado sea > 0)
     var pagoDelMes = cuotaMensual
-    if mes == mesAdelantado {
+    if mes == mesAdelantado && mesAdelantado > 0 {
         pagoDelMes += montoAdicional
     }
     
     // Si el pago supera el saldo pendiente, solo se paga lo que resta
-        if pagoDelMes > saldo {
-            pagoDelMes = saldo
-        }
-        
-        let restaPorPagar = saldo - pagoDelMes
-        
-        print("\(mes) \t \(fechaTexto) \t \(String(format: "%.2f", saldo)) \t \(String(format: "%.2f", pagoDelMes)) \t \(String(format: "%.2f", restaPorPagar))")
-        
-        saldo = restaPorPagar
-        
-        // Avanzar 1 mes para el siguiente pago
-        fechaActual = calendario.date(byAdding: .month, value: 1, to: fechaActual) ?? fechaActual
+    if pagoDelMes > saldo {
+        pagoDelMes = saldo
     }
+    
+    let restaPorPagar = saldo - pagoDelMes
+    
+    print("\(mes) \t \(fechaTexto) \t \(String(format: "%.2f", saldo)) \t \(String(format: "%.2f", pagoDelMes)) \t \(String(format: "%.2f", restaPorPagar))")
+    
+    saldo = restaPorPagar
+    
+    // Avanzar 1 mes para el siguiente pago
+    fechaActual = calendario.date(byAdding: .month, value: 1, to: fechaActual) ?? fechaActual
+}
 
-    print("\nMeses Pagados \(mesesEfectivamentePagados) De \(mesesPlan)")
+// Corrección de sintaxis en el print final
+print("\nMeses Pagados \(mesesEfectivamentePagados) De \(mesesPlan)")
