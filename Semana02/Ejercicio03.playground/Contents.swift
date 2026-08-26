@@ -48,3 +48,21 @@ let dateFormatter = DateFormatter()
 dateFormatter.dateFormat = "dd/MM/yyyy"
 
 var mesesEfectivamentePagados = 0
+
+// 4. Bucle para la tabla de pagos
+for mes in 1...mesesPlan {
+    if saldo <= 0 { break }
+    
+    mesesEfectivamentePagados += 1
+    let fechaTexto = dateFormatter.string(from: fechaActual)
+    
+    // Determinar si hay pago adicional este mes
+    var pagoDelMes = cuotaMensual
+    if mes == mesAdelantado {
+        pagoDelMes += montoAdicional
+    }
+    
+    // Si el pago supera el saldo pendiente, solo se paga lo que resta
+    if pagoDelMes > saldo {
+        pagoDelMes = saldo
+    }
