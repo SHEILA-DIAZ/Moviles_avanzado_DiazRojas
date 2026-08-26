@@ -63,6 +63,18 @@ for mes in 1...mesesPlan {
     }
     
     // Si el pago supera el saldo pendiente, solo se paga lo que resta
-    if pagoDelMes > saldo {
-        pagoDelMes = saldo
+        if pagoDelMes > saldo {
+            pagoDelMes = saldo
+        }
+        
+        let restaPorPagar = saldo - pagoDelMes
+        
+        print("\(mes) \t \(fechaTexto) \t \(String(format: "%.2f", saldo)) \t \(String(format: "%.2f", pagoDelMes)) \t \(String(format: "%.2f", restaPorPagar))")
+        
+        saldo = restaPorPagar
+        
+        // Avanzar 1 mes para el siguiente pago
+        fechaActual = calendario.date(byAdding: .month, value: 1, to: fechaActual) ?? fechaActual
     }
+
+    print("\nMeses Pagados \(mesesEfectivamentePagados) De \(mesesPlan)")
