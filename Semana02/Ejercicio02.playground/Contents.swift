@@ -45,3 +45,9 @@ print("CUOTA M.: \(cuotaMensual)")
 // 5. Generación de la tabla
 print("\nMes \t Monto Inicial \t Cuota Mensual \t Resta x Pago")
 var saldoActual = montoFinanciado
+
+for mes in 1...meses {
+    let restaXPago = saldoActual - cuotaMensual
+    print("\(mes) \t \(String(format: "%.2f", saldoActual)) \t\t \(String(format: "%.2f", cuotaMensual)) \t\t \(String(format: "%.2f", restaXPago))")
+    saldoActual = restaXPago
+}
